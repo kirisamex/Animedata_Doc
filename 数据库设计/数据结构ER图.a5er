@@ -12,7 +12,46 @@ ReadOnlyRecommend=0
 Comment=动画信息整理
 Page=Main
 PageInfo="Main",2,"A3Landscape",$FFFFFF
-LogicalView=0
+Domain=动画编号_char(4)=char(4)
+Domain=动画中文名_varchar(255)=varchar(255)
+Domain=动画日文名_varchar(255)=varchar(255)
+Domain=动画日文拼写_varchar(1000)=varchar(1000)
+Domain=动画简写_varchar(10)=varchar(10)
+Domain=放送状态_smallint=smallint
+Domain=原作_smallint=smallint
+Domain=音乐搜集状态_smallint=smallint
+Domain=有效性FLAG=bit
+Domain=最终更新用户_varchar(100)=varchar(100)
+Domain=来源表_char(2)=char(2)
+Domain=播放信息序号_int=int
+Domain=播放信息_varchar(255)=varchar(255)
+Domain=播放开始时间_datetime=datetime
+Domain=收看时间_datetime=datetime
+Domain=话数_int=int
+Domain=制作公司序号_int=int
+Domain=制作公司名称_varchar(255)=varchar(255)
+Domain=角色序号_int=int
+Domain=角色名称_varchar(255)=varchar(255)
+Domain=主角FLAG_bit=bit
+Domain=声优编号_int=int
+Domain=声优名_varchar(255)=varchar(255)
+Domain=性别_char(1)=char(1)
+Domain=生日_datetime=datetime
+Domain=声优事务所编号_int=int
+Domain=制作公司中文名_varchar(1000)=varchar(1000)
+Domain=制作公司日文名_varchar(1000)=varchar(1000)
+Domain=角色编号_int=int
+Domain=角色中文名_varchar(1000)=varchar(1000)
+Domain=角色日文名_varcahr(1000)=varchar(1000)
+Domain=声优中文名_varchar(1000)=varchar(1000)
+Domain=声优日文名_varchar(1000)=varchar(1000)
+Domain=声优假名_varchar(1000)=varchar(1000)
+Domain=声优日文拼写_varchar(1000)=varchar(1000)
+Domain=序列号_int=int
+Domain=关键字_varchar(1000)=varchar(1000)
+Domain=主键名_varchar(100)=varchar(100)
+Domain=最终更新时间_datetime=datetime
+LogicalView=1
 DecodeDomain=0
 ViewModePageIndividually=1
 ViewMode=2
@@ -30,6 +69,7 @@ FooterRight=
 ShowPageoutRelation=1
 RDBMSType=4
 RDBMSTypeName=Microsoft SQL Server 2008
+CommonField="有效性FLAG","ENABLE_FLG","",,,"","",$FFFFFFFF
 DefaultPkName=%0:s_PKC
 DefaultPkIndexName=%0:s_PKI
 DefaultIndexName=%0:s_IX%1:d
@@ -211,7 +251,7 @@ Entity1=T_CHARACTER_TBL
 Entity2=T_ARTIST_MAPPING_TBL
 RelationType1=1
 RelationType2=3
-Fields1=CHARACTER_NO
+Fields1=CHARACTER_ID
 Fields2=CHILD_CHARACTER_NO
 Cardinarity1=
 Cardinarity2=
@@ -459,21 +499,23 @@ TableOption=
 Page=MAIN
 Left=2100
 Top=500
-Field="动画编号","ANIME_NO","char(4)","NOT NULL",0,"","",$FFFFFFFF,""
-Field="动画中文名","ANIME_CHN_NAME","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="动画日文名","ANIME_JPN_NAME","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="动画简写","ANIME_NN","varchar(10)","NOT NULL",,"","",$FFFFFFFF,""
-Field="状态","STATUS","smallint","NOT NULL",,"","1放送中 \n2完结 \n3新企划 \n9弃置",$FFFFFFFF,""
-Field="原作","ORIGINAL","smallint","NOT NULL",,"","1漫画 \n2小说 \n3原创 \n4影视 \n5游戏 \n9其他",$FFFFFFFF,""
-Field="音乐搜集状态","MUSIC_STATUS","smallint",,,"","0完成收集 \n1部分收集 \n2未收集 \n9放弃收集",$FFFFFFFF,""
-Field="有效性FLAG","ENABLE_FLG","bit","NOT NULL",,"1","",$FFFFFFFF,""
-Field="最终更新时间","LAST_UPDATE_DATETIME","datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
+Field="动画编号","ANIME_NO","*动画编号_char(4)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="动画中文名","ANIME_CHN_NAME","*动画中文名_varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="动画日文名","ANIME_JPN_NAME","*动画日文名_varchar(255)\n动画简写_varchar(10)\n放送状态_smallint\n原作_smallint\n音乐搜集状态_smallint\n有效性FLAG_bit\n最终更新用户_varchar(100)\n最终更新时间_datetime\n播放信息序号_int\n播放信息_varchar(255)\n播放开始时间_datetime\n收看时间_datetime\n话数_int\n制作公司序号_int\n制作公司名称_varchar(255)\n角色序号_int\n角色名称_varchar(255)\n主角FLAG_bit\n声优编号_int\n声优名_varchar(255)\n声优性别_char(1)\n声优生日_datetime\n声优事务所编号_int\n动画日文拼写_varchar(1000)\n制作公司中文名_varchar(1000)\n制作公司日文名_varchar(1000)\n角色编号_int\n角色中文名_varchar(1000)\n角色日文名_varcahr(1000)\n声优中文名_varchar(1000)\n声优日文名_varchar(1000)\n声优假名_varchar(1000)\n声优日文拼写_varchar(1000)\n序列号_int\n关键字_varchar(1000)\n来源表_char(2)\n主键名_varchar(100)\n动画日文名_varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="动画日文拼写","ANIME_ALP_NAME","*动画日文拼写_varchar(1000)",,,"","",$000000FF,""
+Field="动画简写","ANIME_NN","*动画简写_varchar(10)","NOT NULL",,"","",$FFFFFFFF,""
+Field="放送状态","STATUS","*放送状态_smallint","NOT NULL",,"","1放送中 \n2完结 \n3新企划 \n9弃置",$FFFFFFFF,""
+Field="原作","ORIGINAL","*原作_smallint","NOT NULL",,"","1漫画 \n2小说 \n3原创 \n4影视 \n5游戏 \n9其他",$FFFFFFFF,""
+Field="音乐搜集状态","MUSIC_STATUS","*音乐搜集状态_smallint",,,"","0完成收集 \n1部分收集 \n2未收集 \n9放弃收集",$FFFFFFFF,""
+Field="有效性FLAG","ENABLE_FLG","*有效性FLAG","NOT NULL",,"1","",$FFFFFFFF,""
+Field="最终更新用户","LAST_UPDATE_USER_ID","*最终更新用户_varchar(100)","NOT NULL",,"","",$000000FF,""
+Field="最终更新时间","LAST_UPDATE_DATETIME","*最终更新时间_datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
 EffectMode=None
 Tag=ANIMEDATA
 Color=$000000
 BkColor=$99FFFF
-ModifiedDateTime=20160226110227
-Position="MAIN",2100,500,298,229
+ModifiedDateTime=20161209113603
+Position="MAIN",2100,500,298,288
 
 [Entity]
 PName=T_ARTIST_MAPPING_TBL
@@ -529,19 +571,22 @@ TableOption=
 Page=MAIN
 Left=3100
 Top=900
-Field="角色编号","CHARACTER_NO","varchar(10)","NOT NULL",0,""," 格式：动画ID_主角FLG_序号(三位  代码中发番 主角FLG:0/1)\nex：A001_1_001             A015_0_012",$FFFFFFFF,""
-Field="角色名称","CHARACTER_NAME","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="动画编号","ANIME_NO","char(4)","NOT NULL",,"","",$FFFFFFFF,""
-Field="声优编号","CV_ID","int","NOT NULL",,"","",$FFFFFFFF,""
-Field="主角FLAG","LEADING_FLG","bit","NOT NULL",,"0","",$FFFFFFFF,""
-Field="有效性FLAG","ENABLE_FLG","bit","NOT NULL",,"1","",$FFFFFFFF,""
-Field="最终更新时间","LAST_UPDATE_DATETIME","datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
+Field="角色编号","CHARACTER_ID","*角色编号_int","NOT NULL",0,"","",$000000FF,""
+Field="动画编号","ANIME_NO","*动画编号_char(4)","NOT NULL",,"","",$FFFFFFFF,""
+Field="角色序号","CHARACTER_NO","*角色序号_int","NOT NULL",,"","",$000000FF,""
+Field="角色中文名","CHARACTER_CHN_NAME","*角色中文名_varchar(1000)","NOT NULL",,"","",$00FF0000,""
+Field="角色日文名","CHARACTER_JPN_NAME","*角色日文名_varcahr(1000)","NOT NULL",,"","",$000000FF,""
+Field="声优编号","CV_ID","*声优编号_int","NOT NULL",,"","",$FFFFFFFF,""
+Field="主角FLAG","LEADING_FLG","*主角FLAG_bit","NOT NULL",,"0","",$FFFFFFFF,""
+Field="有效性FLAG","ENABLE_FLG","*有效性FLAG","NOT NULL",,"1","",$FFFFFFFF,""
+Field="最终更新用户","LAST_UPDATE_USER_ID","*最终更新用户_varchar(100)","NOT NULL",,"","",$000000FF,""
+Field="最终更新时间","LAST_UPDATE_DATETIME","*最终更新时间_datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
 EffectMode=None
 Tag=ANIMEDATA
 Color=$000000
 BkColor=$FAEBB4
-ModifiedDateTime=20160226103518
-Position="MAIN",3100,900,295,178
+ModifiedDateTime=20161209114630
+Position="MAIN",3100,900,295,270
 
 [Entity]
 PName=T_COMPANY_TBL
@@ -551,16 +596,18 @@ TableOption=
 Page=MAIN
 Left=3500
 Top=700
-Field="制作公司序号","COMPANY_ID","int","NOT NULL",0,"","",$FFFFFFFF,""
-Field="制作公司名称","COMPANY_NAME","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="有效性FLAG","ENABLE_FLG","bit","NOT NULL",,"1","",$FFFFFFFF,""
-Field="最终更新时间","LAST_UPDATE_DATETIME","datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
+Field="制作公司序号","COMPANY_ID","*制作公司序号_int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="制作公司中文名","COMPANY_CHN_NAME","*制作公司中文名_varchar(1000)","NOT NULL",,"","",$00FF0000,""
+Field="制作公司日文名","COMPANY_JPN_NAME","*制作公司日文名_varchar(1000)","NOT NULL",,"","",$000000FF,""
+Field="有效性FLAG","ENABLE_FLG","*有效性FLAG","NOT NULL",,"1","",$FFFFFFFF,""
+Field="最终更新用户","LAST_UPDATE_USER_ID","*最终更新用户_varchar(100)","NOT NULL",,"","",$000000FF,""
+Field="最终更新时间","LAST_UPDATE_DATETIME","*最终更新时间_datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
 EffectMode=None
 Tag=ANIMEDATA
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20160226103921
-Position="MAIN",3500,700,293,102
+ModifiedDateTime=20161209113929
+Position="MAIN",3500,700,293,159
 
 [Entity]
 PName=T_CV_TBL
@@ -570,19 +617,23 @@ TableOption=
 Page=MAIN
 Left=2600
 Top=1200
-Field="声优序号","CV_ID","int","NOT NULL",0,"","",$FFFFFFFF,""
-Field="声优名","CV_NAME","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="声优性别","CV_GENDER","char(1)",,,"","[M]男 [F]女",$FFFFFFFF,""
-Field="声优生日","CV_BIRTH","date",,,"","",$FFFFFFFF,""
-Field="声优事务所ID","CV_OFFICE_ID","int",,,"","暂时不使用 固定null",$FFFFFFFF,""
-Field="有效性FLAG","ENABLE_FLG","bit","NOT NULL",,"1","",$FFFFFFFF,""
-Field="最终更新时间","LAST_UPDATE_DATETIME","datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
+Field="声优编号","CV_ID","int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="声优中文名","CV_CHN_NAME","*声优中文名_varchar(1000)",,,"","",$00FF0000,""
+Field="声优日文名","CV_JPN_NAME","*声优日文名_varchar(1000)","NOT NULL",,"","",$000000FF,""
+Field="声优假名","CV_KANA_NAME","*声优假名_varchar(1000)",,,"","",$000000FF,""
+Field="声优日文拼写","CV_ALP_NAME","*声优日文拼写_varchar(1000)",,,"","",$000000FF,""
+Field="声优性别","CV_GENDER","*性别_char(1)",,,"","[M]男 [F]女",$FFFFFFFF,""
+Field="声优生日","CV_BIRTH","*生日_datetime",,,"","",$FFFFFFFF,""
+Field="声优事务所编号","CV_OFFICE_ID","*声优事务所编号_int",,,"","暂时不使用 固定null",$FFFFFFFF,""
+Field="有效性FLAG","ENABLE_FLG","*有效性FLAG","NOT NULL",,"1","",$FFFFFFFF,""
+Field="最终更新用户","LAST_UPDATE_USER_ID","*最终更新用户_varchar(100)","NOT NULL",,"","",$000000FF,""
+Field="最终更新时间","LAST_UPDATE_DATETIME","*最终更新时间_datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
 EffectMode=None
 Tag=ANIMEDATA
 Color=$000000
 BkColor=$99FFFF
-ModifiedDateTime=20160226103529
-Position="MAIN",2600,1200,302,178
+ModifiedDateTime=20161209140245
+Position="MAIN",2600,1200,302,280
 
 [Entity]
 PName=T_PLAYINFO_TBL
@@ -592,22 +643,24 @@ TableOption=
 Page=MAIN
 Left=3100
 Top=450
-Field="播放信息序号","PLAYINFO_ID","int","NOT NULL",0,"","",$FFFFFFFF,""
-Field="动画编号","ANIME_NO","char(4)","NOT NULL",1,"","",$FFFFFFFF,""
-Field="播放信息","ANIME_PLAYINFO","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="状态","STATUS","smallint","NOT NULL",,"","[1]放送中 \n[2]完结 \n[3]新企划 \n[9]弃置",$FFFFFFFF,""
-Field="播放开始时间","START_TIME","date",,,"","",$FFFFFFFF,""
-Field="收看时间","WATCH_TIME","date",,,"","",$FFFFFFFF,""
-Field="话数","PARTS","int",,,"","",$FFFFFFFF,""
-Field="制作公司序号","COMPANY_ID","int",,,"","",$FFFFFFFF,""
-Field="有效性FLAG","ENABLE_FLG","bit","NOT NULL",,"1","",$FFFFFFFF,""
-Field="最终更新时间","LAST_UPDATE_DATETIME","datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
+Field="播放信息序号","PLAYINFO_ID","*播放信息序号_int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="动画编号","ANIME_NO","*动画编号_char(4)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="播放信息","ANIME_PLAYINFO","*播放信息_varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="放送状态","STATUS","*放送状态_smallint","NOT NULL",,"","[1]放送中 \n[2]完结 \n[3]新企划 \n[9]弃置",$FFFFFFFF,""
+Field="原作","ORIGINAL","*原作_smallint","NOT NULL",,"","",$000000FF,""
+Field="播放开始时间","START_TIME","*播放开始时间_datetime",,,"","",$FFFFFFFF,""
+Field="收看时间","WATCH_TIME","*收看时间_datetime",,,"","",$FFFFFFFF,""
+Field="话数","PARTS","*话数_int",,,"","",$FFFFFFFF,""
+Field="制作公司序号","COMPANY_ID","*制作公司序号_int",,,"","",$FFFFFFFF,""
+Field="有效性FLAG","ENABLE_FLG","*有效性FLAG","NOT NULL",,"1","",$FFFFFFFF,""
+Field="最终更新用户","LAST_UPDATE_USER_ID","*最终更新用户_varchar(100)","NOT NULL",,"","",$000000FF,""
+Field="最终更新时间","LAST_UPDATE_DATETIME","*最终更新时间_datetime","NOT NULL",,"getdate()","",$FFFFFFFF,""
 EffectMode=None
 Tag=ANIMEDATA
 Color=$000000
 BkColor=$FAEBB4
-ModifiedDateTime=20160226103933
-Position="MAIN",3100,450,298,254
+ModifiedDateTime=20161209113716
+Position="MAIN",3100,450,298,331
 
 [Entity]
 PName=T_RESOURCE_TBL
